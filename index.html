@@ -3,47 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock, Paper, Scissors</title>
 </head>
 <body>
     <script>
         let choices = ['Rock','Paper','Scissors'];
 let computerPlay = () =>{
-    let compChoice = choices[Math.round(Math.random()*choices.length)];
+    let compChoice = choices[Math.floor(Math.random()*choices.length)];
     return compChoice;
         }
-
+        let lose = 'You lose!';
+        let win = "You Won!";
 
         
 let playRound =(playerSelection, compSelection)=>{
     let message = '';
+   
     
     if (compSelection===playerSelection){
         message = "It's a draw";
         }else if(compSelection==='rock'){
             if (playerSelection==='paper'){
-                message ='You win';
+                message =win;
                 } else{
-                    message ='You lose!';
+                    message =lose;
                     }
         } else if(compSelection ==="paper"){
             if(playerSelection=== 'rock'){
-                message ='You lose';
+                message =lose;
                 } else {
-                    message ='You lose';
+                    message =lose;
         }}else if (compSelection === 'scissors'){
             if(playerSelection==='rock'){
-                message ='You win!';
-            } else{message ='You Lose';}
+                message =win;
+            } else{message =lose;}
         } return message;
         }
-let playerInput = 'Rock';
-let compInput=computerPlay();
-let compSelection= compInput.toLowerCase();
-let playerSelection= playerInput.toLowerCase();
 
 
-console.log(`You chose ${playerSelection} and the comp chose ${compSelection}...${playRound(playerSelection,compSelection)}`);
+
+//console.log(`You chose ${playerSelection} and the comp chose ${compSelection}...${playRound(playerSelection,compSelection)}`);
+    let game = () =>{
+        let compCount = 0;
+        let playerCount = 0;
+        let gameCount = 0;
+        do {
+           let playerInput = prompt("Please choose from rock, paper or scissors:");
+            let compInput=computerPlay();
+            let compSelection= compInput.toLowerCase();
+            let playerSelection= playerInput.toLowerCase();
+            let endMessage = playRound(playerSelection,compSelection)
+            alert(`You chose ${playerSelection} and the comp chose ${compSelection}...${endMessage}`);
+            if (endMessage ===win){
+                playerCount++;
+                console.log(playerCount);
+                }else if(endMessage === lose){
+                    compCount++;
+                    console.log(compCount);
+                }else{
+                    alert("It's a draw! No change to score");
+                   
+                        }
+                gameCount++;        
+                alert(`After ${gameCount} games the scores are:\nYour score: ${playerCount} - Comp score: ${compCount}`)
+        }while (gameCount < 5);
+        if(compCount > playerCount){
+            alert('unfortunately you lost, refesh to try again');
+        }else {alert('You won! Great, refresh to try again!');
+    }}
+    game();
+  
+  
     </script>
     <p>test
 
